@@ -1,0 +1,42 @@
+#########
+# If you run in ports conflicts you can update ports section like this:
+# "80:80" => "8080:80" To make nginx accessible at http://localhost:8080
+# Based on https://github.com/tbfisher/docker-drupal-nginx
+# and post https://www.chapterthree.com/blog/drupal-development-docker-compose
+# all from Brian Fisher
+mysql:
+  # https://github.com/docker-library/docs/blob/master/mysql/README.md
+  image: mysql:5.5
+  environment:
+    MYSQL_ROOT_PASSWORD: root # mysql access root/root
+    MYSQL_DATABASE: drupal #Customize your database name
+  ports:
+    - "3306:3306"
+redis:
+  image: redis:2.8
+  ports:
+    - "6379:6379"
+solr:
+  image: solr:5.3
+  ports:
+    - "8983:8983"
+mail:
+  # https://hub.docker.com/r/mailhog/mailhog/
+  image: mailhog/mailhog
+  ports:
+   - "1025:1025"
+   - "8025:8025"
+web:
+  # https://github.com/tbfisher/docker-drupal-nginx
+  image: tbfisher/drupal-nginx:php-5.6.x
+  ports:
+   - "80:80"
+   - "443:443"
+   - "2222:22"
+  volumes:
+   - ./www:/var/www  ## Update this to mount your code in nginx folder I.e.:/home/enfuse/mycode:/var/www
+  links:
+   - mysql
+   - mail
+   - redis
+   - solr
