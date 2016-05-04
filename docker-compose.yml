@@ -28,7 +28,7 @@ mail:
    - "8025:8025"
 web:
   # https://github.com/tbfisher/docker-drupal-nginx
-  image: enfuse/drupal-nginx:php-5.6.x
+  image: enfuse/docker-drupal-nginx:php-5.6.x
   ports:
    - "80:80"
    - "443:443"
