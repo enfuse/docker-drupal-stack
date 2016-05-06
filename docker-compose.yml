@@ -16,10 +16,10 @@ redis:
   image: redis:2.8
   ports:
     - "6379:6379"
-solr:
-  image: solr:5.3
-  ports:
-    - "8983:8983"
+#solr:
+#  image: solr:5.3
+#  ports:
+#    - "8983:8983"
 mail:
   # https://hub.docker.com/r/mailhog/mailhog/
   image: mailhog/mailhog
@@ -34,9 +34,9 @@ web:
    - "443:443"
    - "2222:22"
   volumes:
-   - ./www:/var/www  ## Update this to mount your code in nginx folder I.e.:/home/enfuse/mycode:/var/www
+   - ../../:/var/www/web  ## Update this to mount your code in nginx folder I.e.:/home/enfuse/mycode:/var/www
   links:
    - mysql
    - mail
    - redis
-   - solr
+##   - solr
